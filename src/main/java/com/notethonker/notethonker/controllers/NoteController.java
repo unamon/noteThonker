@@ -17,15 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.notethonker.notethonker.domain.Note;
 import com.notethonker.notethonker.service.NoteService;
 
+import jakarta.validation.Valid;
+
 @RestController
-@RequestMapping("api/notes")
+@RequestMapping("/notes")
 public class NoteController {
-   
     @Autowired
-    NoteService noteService;
+    private NoteService noteService;
 
     @PostMapping
-    public ResponseEntity<Note> create(@RequestBody Note newNote) {
+    public ResponseEntity<Note> create(@RequestBody @Valid Note newNote) {
         Note note = noteService.create(newNote);
         return ResponseEntity.status(HttpStatus.CREATED).body(note);
     }

@@ -2,6 +2,8 @@ package com.notethonker.notethonker.domain;
 
 import java.time.LocalDateTime;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -67,4 +69,9 @@ public class Note {
     public void setDate_alarm(LocalDateTime date_alarm) {
         this.date_alarm = date_alarm;
     }    
+
+    @Override
+    public boolean equals(Object obj) {
+        return EqualsBuilder.reflectionEquals( obj,this);
+    }
 }
