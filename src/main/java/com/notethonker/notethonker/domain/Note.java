@@ -8,7 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity
+@Entity(name = "notes")
 public class Note {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,12 +24,18 @@ public class Note {
 
     public Note() {
     }
-    public Note(Long id, String title, String content, LocalDateTime date_created, LocalDateTime date_alarm) {
-        this.id = id;
+    public Note(String title, String content, LocalDateTime date_created, LocalDateTime date_alarm) {
         this.title = title;
         this.content = content;
         this.date_created = date_created;
         this.date_alarm = date_alarm;
+    }
+    public Note(Note note) { 
+        this.id = note.getId();
+        this.title = note.getTitle();
+        this.content = note.getContent();
+        this.date_created = note.getDate_created();
+        this.date_alarm = note.getDate_alarm();
     }
     public Long getId() {
         return id;
