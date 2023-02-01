@@ -28,4 +28,9 @@ public class GeneralExceptionHandler extends ResponseEntityExceptionHandler{
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
             .body(ex.getMessage());
     }
+
+    // @ExceptionHandler(UnprocessableEntity.class)
+    // private ResponseEntity<Object> handleUnprocessableEntity(UnprocessableEntity ex){
+    //     return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body("a");
+    // }
 }
