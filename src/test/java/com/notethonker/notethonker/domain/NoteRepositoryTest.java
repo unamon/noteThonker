@@ -9,21 +9,28 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.test.context.jdbc.Sql;
 
 import com.notethonker.notethonker.repository.NoteRepository;
 
 @DataJpaTest
-public class NoteRespositoryTest {
+public class NoteRepositoryTest {
     @Autowired
     private NoteRepository noteRepository;
     @Autowired
     TestEntityManager testEntityManager;
 
+    @AfterEach
+    public void afterEach(){
+        NOTE.setId(null);
+    }
+    
     @Test
     public void createNote_WithValidData_ReturnsNote() { 
         Note note = noteRepository.save(NOTE);
@@ -59,6 +66,7 @@ public class NoteRespositoryTest {
         assertThat(sut).isEmpty();
     }
 
+    @Sql(scripts = "/import.sql")
     @Test
     public void removeNote_ByExistingId_ReturnsEmpty() {
         noteRepository.deleteById(1l);
