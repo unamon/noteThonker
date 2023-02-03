@@ -81,6 +81,6 @@ public class NoteControllerTest {
         doThrow(EmptyResultDataAccessException.class).when(noteService).remove(999L);
 
         mockMvc.perform(delete("/notes/999"))
-        .andExpect(status().isBadRequest());
+        .andExpect(status().isNotFound());
     }
 }
