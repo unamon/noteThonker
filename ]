@@ -1,0 +1,13 @@
+package com.notethonker.notethonker.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.notethonker.notethonker.domain.Note;
+
+public interface NoteRepository extends JpaRepository<Note, Long>{
+    @Query("SELECT n from Note n WHERE n.title LIKE '%:searchString%' OR n.content LIKE '%:searchString%'")
+    List<Note> search(String searchString);
+}

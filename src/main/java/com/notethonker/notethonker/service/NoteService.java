@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import com.notethonker.notethonker.domain.Note;
@@ -31,6 +32,9 @@ public class NoteService {
         noteRepo.deleteById(id);
     }
 
+    public List<Note> find(String searchString) { 
+       return noteRepo.search(searchString);
+    }
     public Optional<Note> update(Long id, Note updateNote) {
         Optional<Note> noteDB = noteRepo.findById(id);
         if(noteDB.isEmpty()) {
